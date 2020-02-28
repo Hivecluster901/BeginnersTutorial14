@@ -48,10 +48,10 @@ private:
 	/*  User Variables              */
     std::random_device rd;
     std::mt19937 rng;
+    Board brd;
     std::uniform_int_distribution<int> xDist;
     std::uniform_int_distribution<int> yDist;
-    Board brd;
-
-    
+    Location loc;
+    Snake snake;
 	/********************************/
 };

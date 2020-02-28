@@ -27,10 +27,13 @@ Game::Game(MainWindow& wnd)
     wnd(wnd),
     gfx(wnd),
     rng(rd()),
-    xDist(0, 9),
-    yDist(0, 9),
-    brd(gfx)
+    brd(gfx),
+    xDist(0, brd.GetGridWidth()),
+    yDist(0, brd.GetGridHeight()),
+    snake(loc)
 {
+    loc.x = xDist(rng);
+    loc.y = yDist(rng);
 }
 
 void Game::Go()
@@ -43,8 +46,29 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+    if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+    {
+        Location delta_loc = { 1,0 };
+        snake.MoveBy(loc);
+    }
+    if (wnd.kbd.KeyIsPressed(VK_LEFT))
+    {
+        Location delta_loc = { -1,0 };
+        snake.MoveBy(loc);
+    }
+    if (wnd.kbd.KeyIsPressed(VK_UP))
+    {
+        Location delta_loc = { 0, 1 };
+        snake.MoveBy(loc);
+    }
+    if (wnd.kbd.KeyIsPressed(VK_DOWN))
+    {
+        Location delta_loc = { 0, -1 };
+        snake.MoveBy(loc);
+    }
 }
 
 void Game::ComposeFrame()
 {
+    snake.Draw(brd);
 }
