@@ -9,23 +9,49 @@ Board::Board(Graphics& gfx)
 
 void Board::DrawCell( const Location& loc, Color c)
 {
-	if (IsWithinTheBoard(loc))
-	{
-		gfx.DrawRectDim(loc.x * dimension, loc.y * dimension, dimension, dimension, c);
-	}
+	
+	gfx.DrawRectDim(loc.x * dimension, loc.y * dimension, dimension, dimension, c);
+
 }
 
-int Board::GetGridWidth()
+int Board::GetGridWidth() const
 {
 	return width;
 }
 
-int Board::GetGridHeight()
+int Board::GetGridHeight() const
 {
 	return height;
 }
 
-bool Board::IsWithinTheBoard(const Location& loc) const
+bool Board::isWithinBoard(const Location& loc)
 {
-	return loc.x >= 0 && loc.y >= 0 && loc.x < width && loc.y < height;
+	return loc.x >= 0 && loc.y >= 0 && loc.x <= width && loc.y <= height;
 }
+
+/*int Board::GetDimension() const
+{
+	return dimension;
+}*/
+
+/*void Board::Check_IsWithinBoard(Location& loc)
+{
+	if (loc.x >=0 && loc.y >= 0 && loc.x <= width && loc.y <= height)
+	{
+		isWithinBoard = false;
+	}
+}
+
+void Board::RefreshIsWithinBoard()
+{
+	if (isWithinBoard == false)
+	{
+		isWithinBoard = true;
+	}
+}
+
+bool Board::IsWithinBoard() const
+{
+	return isWithinBoard;
+}*/
+

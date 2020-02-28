@@ -54,5 +54,6 @@ private:
     Location loc;
     Snake snake;
     Location delta_loc;
+    bool isWithinBoard;
 	/********************************/
 };

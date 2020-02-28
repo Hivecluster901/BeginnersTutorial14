@@ -46,26 +46,41 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    if (wnd.kbd.KeyIsPressed(VK_RIGHT) && brd.IsWithinTheBoard(loc))
+    snake.ClampToboard(brd);
+    //brd.Check_IsWithinBoard(snake.GetLocationOfHead());
+    //if (brd.IsWithinBoard())
+    if (isWithinBoard == true)
     {
-        delta_loc = { 1,0 };
-        snake.MoveBy(delta_loc);
+        isWithinBoard = brd.isWithinBoard(snake.GetLocationOfHead());
     }
-    if (wnd.kbd.KeyIsPressed(VK_LEFT) && brd.IsWithinTheBoard(loc))
+    else
     {
-        delta_loc = { -1,0 };
-        snake.MoveBy(delta_loc);
+        isWithinBoard = true;
     }
-    if (wnd.kbd.KeyIsPressed(VK_UP) && brd.IsWithinTheBoard(loc))
+    if(isWithinBoard)
     {
-        delta_loc = { 0, -1 };
-        snake.MoveBy(delta_loc);
+        if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+        {
+            delta_loc = { 1,0 };
+            snake.MoveBy(delta_loc);
+        }
+        if (wnd.kbd.KeyIsPressed(VK_LEFT))
+        {
+            delta_loc = { -1,0 };
+            snake.MoveBy(delta_loc);
+        }
+        if (wnd.kbd.KeyIsPressed(VK_UP))
+        {
+            delta_loc = { 0, -1 };
+            snake.MoveBy(delta_loc);
+        }
+        if (wnd.kbd.KeyIsPressed(VK_DOWN))
+        {
+            delta_loc = { 0, 1 };
+            snake.MoveBy(delta_loc);
+        }
     }
-    if (wnd.kbd.KeyIsPressed(VK_DOWN) && brd.IsWithinTheBoard(loc))
-    {
-        delta_loc = { 0, 1 };
-        snake.MoveBy(delta_loc);
-    }
+    //brd.RefreshIsWithinBoard();
 }
 
 void Game::ComposeFrame()

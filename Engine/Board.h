@@ -10,9 +10,13 @@ class Board
 public:
 	Board(Graphics& gfx);
 	void DrawCell( const Location &loc, Color c);
-	int GetGridWidth();
-	int GetGridHeight();
-	bool IsWithinTheBoard(const Location &loc) const;
+	int GetGridWidth() const;
+	int GetGridHeight() const;
+	//int GetDimension() const;
+	//void Check_IsWithinBoard(Location &loc);
+	/*void RefreshIsWithinBoard();
+	bool IsWithinBoard() const;*/
+	bool isWithinBoard(const Location &loc);
 private:
 	static constexpr int dimension = 20;
 	static constexpr int width = 10;

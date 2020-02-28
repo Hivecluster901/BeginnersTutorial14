@@ -32,6 +32,16 @@ void Snake::Draw(Board& brd) const
 	}
 }
 
+Location Snake::GetLocationOfHead() const
+{
+	return segments[0].GetLocation();
+}
+
+void Snake::ClampToboard(const Board& brd)
+{
+	segments[0].ClampToBoard(brd);
+}
+
 void Snake::Segment::InitHead(const Location& in_loc)
 {
 	loc = in_loc;
@@ -56,5 +66,34 @@ void Snake::Segment::MoveBy(const Location& delta_loc)
 
 void Snake::Segment::Draw(Board& brd) const
 {
-	brd.DrawCell(loc, c);
+	
+		brd.DrawCell(loc, c);
 }
+
+Location Snake::Segment::GetLocation() const
+{
+	return loc;
+}
+
+void Snake::Segment::ClampToBoard(const Board& brd)
+{
+	if (loc.x >= brd.GetGridWidth())
+	{
+		loc.x = brd.GetGridWidth();
+	}
+	if (loc.x < 1)
+	{
+		loc.x = 0;
+	}
+	if (loc.y  >= brd.GetGridHeight())
+	{
+		loc.y = brd.GetGridHeight();
+	}
+	if (loc.y < 1)
+	{
+		loc.y = 0;
+	}
+}
+
+
+
