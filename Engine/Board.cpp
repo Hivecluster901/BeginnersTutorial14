@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <assert.h>
 
 Board::Board(Graphics& gfx)
 	:
@@ -8,11 +9,10 @@ Board::Board(Graphics& gfx)
 
 void Board::DrawCell( const Location& loc, Color c)
 {
-	assert(loc.x >= 0);
-	assert(loc.y >= 0);
-	assert(loc.x < width);
-	assert(loc.x < height);
-	gfx.DrawRectDim(loc.x * dimension, loc.y * dimension, dimension, dimension, c);
+	if (IsWithinTheBoard(loc))
+	{
+		gfx.DrawRectDim(loc.x * dimension, loc.y * dimension, dimension, dimension, c);
+	}
 }
 
 int Board::GetGridWidth()
@@ -23,4 +23,9 @@ int Board::GetGridWidth()
 int Board::GetGridHeight()
 {
 	return height;
+}
+
+bool Board::IsWithinTheBoard(const Location& loc) const
+{
+	return loc.x >= 0 && loc.y >= 0 && loc.x < width && loc.y < height;
 }

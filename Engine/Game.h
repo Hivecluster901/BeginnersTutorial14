@@ -53,5 +53,6 @@ private:
     std::uniform_int_distribution<int> yDist;
     Location loc;
     Snake snake;
+    Location delta_loc;
 	/********************************/
 };

@@ -46,25 +46,25 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+    if (wnd.kbd.KeyIsPressed(VK_RIGHT) && brd.IsWithinTheBoard(loc))
     {
-        Location delta_loc = { 1,0 };
-        snake.MoveBy(loc);
+        delta_loc = { 1,0 };
+        snake.MoveBy(delta_loc);
     }
-    if (wnd.kbd.KeyIsPressed(VK_LEFT))
+    if (wnd.kbd.KeyIsPressed(VK_LEFT) && brd.IsWithinTheBoard(loc))
     {
-        Location delta_loc = { -1,0 };
-        snake.MoveBy(loc);
+        delta_loc = { -1,0 };
+        snake.MoveBy(delta_loc);
     }
-    if (wnd.kbd.KeyIsPressed(VK_UP))
+    if (wnd.kbd.KeyIsPressed(VK_UP) && brd.IsWithinTheBoard(loc))
     {
-        Location delta_loc = { 0, 1 };
-        snake.MoveBy(loc);
+        delta_loc = { 0, -1 };
+        snake.MoveBy(delta_loc);
     }
-    if (wnd.kbd.KeyIsPressed(VK_DOWN))
+    if (wnd.kbd.KeyIsPressed(VK_DOWN) && brd.IsWithinTheBoard(loc))
     {
-        Location delta_loc = { 0, -1 };
-        snake.MoveBy(loc);
+        delta_loc = { 0, 1 };
+        snake.MoveBy(delta_loc);
     }
 }
 
